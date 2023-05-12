@@ -7,7 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EmporaAssignmentApplication {
 
 	public static void main(String[] args) {
+
+
 		SpringApplication.run(EmporaAssignmentApplication.class, args);
+
+
+
 	}
 
 }
