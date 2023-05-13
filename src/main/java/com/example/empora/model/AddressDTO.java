@@ -1,27 +1,37 @@
-package com.example.empora;
+package com.example.empora.model;
 
 public class AddressDTO {
 
-private String primaryNumber;
-private String streetName;
-private String streetSuffix;
-private String cityName;
-private String zipcode;
-private String plus4Code;
-private boolean isValidAddress;
+    private String primaryNumber;
+    private String streetDirection;
+    private String streetName;
+    private String streetSuffix;
+    private String cityName;
+    private String zipcode;
+    private String plus4Code;
+    private boolean isValidAddress;
 
-    public AddressDTO(String primaryNumber, String streetName, String streetSuffix, String cityName, String zipcode, String plus4Code, boolean isValidAddress) {
+    public AddressDTO(String primaryNumber, String streetDirection, String streetName, String streetSuffix, String cityName, String zipcode, String plus4Code, boolean isValidAddress) {
         this.primaryNumber = primaryNumber;
+        this.streetDirection = streetDirection;
         this.streetName = streetName;
         this.streetSuffix = streetSuffix;
         this.cityName = cityName;
         this.zipcode = zipcode;
         this.plus4Code = plus4Code;
-        this.isValidAddress = isValidAddress;
+
     }
 
 
     public AddressDTO() {
+    }
+
+    public String getStreetDirection() {
+        return streetDirection;
+    }
+
+    public void setStreetDirection(String streetDirection) {
+        this.streetDirection = streetDirection;
     }
 
     public String getPrimaryNumber() {
@@ -71,13 +81,5 @@ private boolean isValidAddress;
 
     public void setPlus4Code(String plus4Code) {
         this.plus4Code = plus4Code;
-    }
-
-    public boolean getValidAddress() {
-        return isValidAddress;
-    }
-
-    public void setValidAddress(boolean validAddress) {
-        this.isValidAddress = validAddress;
     }
 }

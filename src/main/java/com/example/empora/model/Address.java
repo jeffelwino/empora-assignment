@@ -1,4 +1,4 @@
-package com.example.empora;
+package com.example.empora.model;
 
 public class Address {
     private String street;
