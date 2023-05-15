@@ -44,9 +44,11 @@ I recognize this is not very secure. For whatever reason, there were difficultie
 
 ## Explanation of App Design
 
+The overall thought behind the design was to maximize cohesion and minimize coupling. Each class handles seperate aspects of the process: File intake, Api calling, output formatting, and then finally running everything together. Much of this was acheived by using helper functions in class that were called only exposed by a single method that is called outside of the class. 
+
 ### FileReader class
 
-The Filereader class handles the intake csv document information. It takes in a document and, row by row, splits the address at each comma into a string array. These strings then become the "street", "city", and "zipcode" properties of a new Address object. The Address object is then added to an ArrayList of Addresses.
+The Filereader class handles the intake csv document information. It takes in a document and, row by row, splits the address at each comma into a string array. These strings then become the properties of a new Address object. The Address object is then added to an ArrayList of Addresses.
 
 ### Address model class
 
