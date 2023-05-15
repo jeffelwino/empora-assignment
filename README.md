@@ -44,7 +44,7 @@ I recognize this is not very secure. For whatever reason, there were difficultie
 
 ## Explanation of App Design
 
-The overall thought behind the design was to maximize cohesion and minimize coupling. Each class handles seperate aspects of the process: File intake, Api calling, output formatting, and then finally running everything together. Much of this was acheived by using helper functions in class that were called only exposed by a single method that is called outside of the class. 
+The overall thought behind the design was to maximize cohesion and minimize coupling. Each class handles seperate aspects of the process: File intake and Address object creation, Api calls and DTO creation, output formatting, and the final 'run' method where all of these classes get utilized. making for code with an easy to follow path.
 
 ### FileReader class
 
