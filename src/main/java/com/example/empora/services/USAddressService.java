@@ -9,10 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,8 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -37,12 +36,13 @@ public class USAddressService {
     public USAddressService() {
     }
 
-    public List<AddressDTO> getAddressDTOs(List<Address> addresses){
-        List<AddressDTO> dtoList = new ArrayList<>();
+    public Map<Address,AddressDTO> getAddressDTOs(List<Address> addresses){
+        Map<Address,AddressDTO> addressesMap = new HashMap<>();
+
         for(Address entry: addresses){
-            dtoList.add(getSmartyAddress(entry));
+            addressesMap.put(entry,getSmartyAddress(entry));
         }
-        return dtoList;
+        return addressesMap;
     }
 
     public AddressDTO getSmartyAddress(Address entry) {

@@ -33,6 +33,8 @@ class FileReaderTest {
 
         fileReader.readFile(FILE_PATH);
         List<Address>testAddresses = fileReader.getAddresses();
+
+
         assertEquals(2,testAddresses.size());
 
     }

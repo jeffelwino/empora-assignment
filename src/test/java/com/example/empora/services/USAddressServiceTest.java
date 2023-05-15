@@ -25,6 +25,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -134,15 +136,16 @@ class USAddressServiceTest {
                 )
         ).thenReturn(mockedResponse);
 
-        List<AddressDTO> dtoList = service.getAddressDTOs(makeAddressList());
+        AddressDTO nullDTO = service.getSmartyAddress(makeAddressList().get(1));
 
-        assertEquals (0, dtoList.get(1).getPrimaryNumber());
-        assertNull(dtoList.get(1).getStreetDirection(), "Null St direction");
-        assertNull(dtoList.get(1).getStreetName(), "Null Street Name");
-        assertNull(dtoList.get(1).getStreetSuffix(), "Null Street Suffix");
-        assertNull(dtoList.get(1).getCityName(), "Null City Name");
-        assertEquals(0,dtoList.get(1).getZipcode());
-        assertEquals(0,dtoList.get(1).getPlus4Code());
+
+        assertEquals (0, nullDTO.getPrimaryNumber());
+        assertNull(nullDTO.getStreetDirection(), "Null St direction");
+        assertNull(nullDTO.getStreetName(), "Null Street Name");
+        assertNull(nullDTO.getStreetSuffix(), "Null Street Suffix");
+        assertNull(nullDTO.getCityName(), "Null City Name");
+        assertEquals(0,nullDTO.getZipcode());
+        assertEquals(0,nullDTO.getPlus4Code());
 
     }
 
