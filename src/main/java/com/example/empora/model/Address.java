@@ -3,9 +3,9 @@ package com.example.empora.model;
 public class Address {
     private String street;
     private String city;
-    private String zipCode;
+    private int zipCode;
 
-    public Address(String street, String city, String zipCode) {
+    public Address(String street, String city, int zipCode) {
         this.street = street;
         this.city = city;
         this.zipCode = zipCode;
@@ -22,7 +22,7 @@ public class Address {
         return city;
     }
 
-    public String getZipCode() {
+    public int getZipCode() {
         return zipCode;
     }
 }

@@ -9,7 +9,7 @@ String buildAddressOutput(Address address);
 
 String buildDTOOutput(AddressDTO addressDTO);
 
-String buildOutput(Address address, AddressDTO dto);
+String buildFullOutput(Address address, AddressDTO dto);
 
 
 

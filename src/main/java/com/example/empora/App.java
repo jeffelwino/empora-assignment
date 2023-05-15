@@ -12,21 +12,34 @@ import java.util.Scanner;
 @Component
 public class App {
 
-//    String filePath = "empora_test_data.csv";
     FileReader reader = new FileReader();
     USAddressService addressService = new USAddressService();
-    Output output = new Output();
+    OutputBuilder output = new OutputBuilder();
 
-    public void run(String filePath){
+    public void run(){
 
-        reader.readFile(filePath);
+        reader.readFile(retrieveUserFile());
+
         List<Address> addresses = reader.getAddresses();
 
         List<AddressDTO> dtoList = addressService.getAddressDTOs(addresses);
 
         for(int i = 0; i < addresses.size(); i++){
-            System.out.println(output.buildOutput(addresses.get(i),dtoList.get(i)));
+            System.out.println(output.buildFullOutput(addresses.get(i),dtoList.get(i)));
         }
+        System.out.println(" ");
+        System.exit(0);
 
+    }
+
+    public String retrieveUserFile(){
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Please enter the path of the file to be read:");
+
+        String filePath = userInput.next();
+
+        System.out.println("Thank you");
+        System.out.println(" ");
+        return filePath;
     }
 }

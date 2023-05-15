@@ -9,9 +9,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Component
+@Service
 public class USAddressService {
 
     @Autowired
@@ -45,7 +47,13 @@ public class USAddressService {
 
     public AddressDTO getSmartyAddress(Address entry) {
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(smarty.getApiURL()).queryParam("street", entry.getStreet()).queryParam("city", entry.getCity()).queryParam("zipcode", entry.getZipCode()).queryParam("auth-id", smarty.getAuthId()).queryParam("auth-token",smarty.getAuthToken());
+        UriComponentsBuilder builder =
+                UriComponentsBuilder.fromHttpUrl(smarty.getApiURL()).
+                        queryParam("street", entry.getStreet()).
+                        queryParam("city", entry.getCity()).
+                        queryParam("zipcode", entry.getZipCode()).
+                        queryParam("auth-id", smarty.getAuthId()).
+                        queryParam("auth-token",smarty.getAuthToken());
 
         URI url = builder.build().toUri();
 
@@ -63,8 +71,6 @@ public class USAddressService {
             if (jsonNode.isArray()) {
                 for (JsonNode root : jsonNode) {
                     JsonNode components = root.path("components");
-                    JsonNode analysisNode = root.path("analysis");
-
                     String primaryNumber = components.path("primary_number").asText();
                     String streetDirection = components.path("street_predirection").asText();
                     String streetName = components.path("street_name").asText();
@@ -72,12 +78,8 @@ public class USAddressService {
                     String cityName = components.path("city_name").asText();
                     String zipcode = components.path("zipcode").asText();
                     String plus4Code = components.path("plus4_code").asText();
-                    boolean isValid = true;
 
-                    if (jsonNode.at("/analysis/dpv_footnotes") == null || jsonNode.at("/analysis/dpv_footnotes").asText().equals("A1")) {
-                        isValid = false;
-                    }
-                    addressDTO = new AddressDTO(primaryNumber, streetDirection, streetName, streetSuffix, cityName, zipcode, plus4Code, isValid);
+                    addressDTO = new AddressDTO(Integer.parseInt(primaryNumber), streetDirection, streetName, streetSuffix, cityName, Integer.parseInt(zipcode), Integer.parseInt(plus4Code));
                 }
             }
 
@@ -86,7 +88,6 @@ public class USAddressService {
         }
 
         return addressDTO;
-
 
     }
 

@@ -2,16 +2,18 @@ package com.example.empora.model;
 
 public class AddressDTO {
 
-    private String primaryNumber;
+    private int primaryNumber = 0;
+    //North, South, etc
     private String streetDirection;
     private String streetName;
+    //St, Ave, etc
     private String streetSuffix;
     private String cityName;
-    private String zipcode;
-    private String plus4Code;
-    private boolean isValidAddress;
+    private int zipcode = 0;
+    private int plus4Code = 0;
 
-    public AddressDTO(String primaryNumber, String streetDirection, String streetName, String streetSuffix, String cityName, String zipcode, String plus4Code, boolean isValidAddress) {
+
+    public AddressDTO(int primaryNumber, String streetDirection, String streetName, String streetSuffix, String cityName, int zipcode, int plus4Code) {
         this.primaryNumber = primaryNumber;
         this.streetDirection = streetDirection;
         this.streetName = streetName;
@@ -19,7 +21,6 @@ public class AddressDTO {
         this.cityName = cityName;
         this.zipcode = zipcode;
         this.plus4Code = plus4Code;
-
     }
 
 
@@ -34,11 +35,11 @@ public class AddressDTO {
         this.streetDirection = streetDirection;
     }
 
-    public String getPrimaryNumber() {
+    public int getPrimaryNumber() {
         return primaryNumber;
     }
 
-    public void setPrimaryNumber(String primaryNumber) {
+    public void setPrimaryNumber(int primaryNumber) {
         this.primaryNumber = primaryNumber;
     }
 
@@ -66,20 +67,37 @@ public class AddressDTO {
         this.cityName = cityName;
     }
 
-    //returns full zipcode
-    public String getZipcode() {
-        return zipcode + "-" + plus4Code;
+    public int getZipcode() {
+        return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
+    public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
     }
 
-    public String getPlus4Code() {
+    public int getPlus4Code() {
         return plus4Code;
     }
 
-    public void setPlus4Code(String plus4Code) {
+    public void setPlus4Code(int plus4Code) {
         this.plus4Code = plus4Code;
     }
+
+    /**
+     * @return zip and plus4 code
+     */
+    public String getFullZipcode(){
+        return zipcode + "-" + plus4Code;
+    }
+
+    /**
+     * @return full street address (primary number, street direction(if exists), street name, street suffix)
+     */
+    public String getFullStreetAddress(){
+        if(streetDirection == null){
+            return primaryNumber + " " + streetName + " " + streetSuffix;
+        }
+        return primaryNumber + " " + streetDirection + " " + streetName + " " + streetSuffix;
+    }
+
 }
